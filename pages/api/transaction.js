@@ -2,6 +2,8 @@ import { Gr4vy, withToken } from "@gr4vy/sdk";
 import fs from "fs";
 import {server, id, paymentServiceId } from "../../config.json";
 
+// This creates a new transaction using the Plaid public token
+
 export default async (request, response) => {
   const { token } = request.body
 

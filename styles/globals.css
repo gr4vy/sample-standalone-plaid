@@ -9,3 +9,6 @@ main {
   vertical-align: middle;
   text-align: center;
 }
+code, pre {
+  text-align: left;
+}

@@ -5,14 +5,19 @@ import { PlaidLink } from "react-plaid-link";
 const Home = () => {
   const [session, setSession] = useState(null);
   const [linkToken, setLinkToken] = useState(null);
+  const [transaction, setTransaction] = useState(null);
 
+  // Fetch the plaid Link token
   useEffect(() => {
     if (!session) {
-      fetch(`/api/session`).then((res) => res.json()).then(setSession);
+      fetch(`/api/session`)
+        .then((res) => res.json())
+        .then(setSession);
     }
   }, [session]);
 
-
+  // Once Plaid Link has successfully authenticated the user, create
+  // a transaction
   useEffect(() => {
     if (linkToken) {
       fetch(`/api/transaction`, {
@@ -21,12 +26,13 @@ const Home = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          token: linkToken
-        })
-      }).then((res) => res.json()).then(console.log);
+          token: linkToken,
+        }),
+      })
+        .then((res) => res.json())
+        .then(setTransaction);
     }
   }, [linkToken]);
-
 
   return (
     <>
@@ -37,12 +43,12 @@ const Home = () => {
       </Head>
       <main>
         {session && (
-          <PlaidLink
-            token={session['link_token']}
-            onSuccess={setLinkToken}
-          >
-            Link your bank account
-          </PlaidLink>
+          <>
+            <PlaidLink token={session["link_token"]} onSuccess={setLinkToken}>
+              Link your bank account
+            </PlaidLink>
+            <pre><code>{transaction && JSON.stringify(transaction, null, 2)}</code></pre>
+          </>
         )}
       </main>
     </>
