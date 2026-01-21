@@ -5,7 +5,7 @@ import {server, id, paymentServiceId } from "../../config.json";
 // This creates a new transaction using the Plaid public token
 
 export default async (request, response) => {
-  const { token } = request.body
+  const { token, metadata } = request.body
 
   const gr4vy = new Gr4vy({
     id,
@@ -22,7 +22,16 @@ export default async (request, response) => {
     intent: "capture",
     paymentMethod: {
       method: "plaid",
+      // Passing the account ID is only required when Plaid Identity has been disabled
+      accountId: metadata["accounts"][0]["id"],
       token,
+    },
+    // Passing the buyer is only required when Plaid Identity has been disabled
+    buyer: {
+      billingDetails: {
+        firstName: "John",
+        lastName: "Doe",
+      } 
     },
     paymentServiceId,
   });
