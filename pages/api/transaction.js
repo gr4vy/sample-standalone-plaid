@@ -22,7 +22,7 @@ export default async (request, response) => {
     intent: "capture",
     paymentMethod: {
       method: "plaid",
-      // Passing the account ID is only required when Plaid Identity has been disabled
+      // Passing the account ID is optional
       accountId: metadata["accounts"][0]["id"],
       token,
     },

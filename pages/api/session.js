@@ -18,7 +18,11 @@ export default async (_, response) => {
         })}`,
       },
       body: JSON.stringify({
-         "action": "create-link-token"
+         "action": "create-link-token",
+         "payload": {
+            products: ["auth"],
+            optional_products: []
+         }
       })
     }).then((res) => res.json());
 
