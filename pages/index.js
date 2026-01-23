@@ -47,6 +47,7 @@ const Home = () => {
             }}>
               Link your bank account
             </PlaidLink>
+            <pre><code>{session && JSON.stringify(session, null, 2)}</code></pre>
             <pre><code>{linkData && JSON.stringify(linkData, null, 2)}</code></pre>
             <pre><code>{transaction && JSON.stringify(transaction, null, 2)}</code></pre>
           </>
