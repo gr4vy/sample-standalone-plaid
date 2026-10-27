@@ -12,8 +12,9 @@ To run this sample please perform the following steps.
   - `server` - The environment to use for processing, either `production` or `sandbox`
   - `paymentServiceId` - The ID of the payment service to use for processing the payment
 - Install Node `v18` or above as well as the dependencies for this project
-  - Run `npm install`
-- Start the server with `npm run dev`
+  - Enable [pnpm](https://pnpm.io) with `corepack enable` (the version is pinned in `package.json`)
+  - Run `pnpm install`
+- Start the server with `pnpm dev`
 
 ### Running on HTTPS
 
